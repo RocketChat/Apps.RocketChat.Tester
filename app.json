@@ -1,0 +1,15 @@
+{
+    "id": "bc4dd4a1-bf9b-408e-83a4-aba7eba0bf02",
+    "version": "0.0.1",
+    "requiredApiVersion": "^1.4.0",
+    "iconFile": "icon.png",
+    "author": {
+        "name": "Rocket.Chat",
+        "homepage": "https://github.com/RocketChat",
+        "support": "a"
+    },
+    "name": "Apps.RocketChat.Tester",
+    "nameSlug": "appsrocketchattester",
+    "classFile": "AppsRocketChatTesterApp.ts",
+    "description": "An app that provides endpoints to test Apps integration to Rocket.Chat"
+}
