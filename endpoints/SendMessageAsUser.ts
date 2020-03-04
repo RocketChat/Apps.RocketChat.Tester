@@ -1,17 +1,20 @@
 import { HttpStatusCode, IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { ApiEndpoint, IApiEndpointInfo, IApiRequest, IApiResponse } from '@rocket.chat/apps-engine/definition/api';
+import { safeJsonParse } from '../lib/safeJsonParse';
 
 export class SendMessageAsUserEndpoint extends ApiEndpoint {
     public path = 'send-message-as-user';
 
     // tslint:disable-next-line: max-line-length
     public async post(request: IApiRequest, endpoint: IApiEndpointInfo, read: IRead, modify: IModify, http: IHttp, persis: IPersistence): Promise<IApiResponse> {
-        const room = await read.getRoomReader().getById('GENERAL');
+        const { roomId = 'GENERAL' } = safeJsonParse(request.content) || {};
+
+        const room = await read.getRoomReader().getById(roomId);
 
         if (!room) {
             return {
                 status: HttpStatusCode.NOT_FOUND,
-                content: `Room '#general' could not be found`,
+                content: `Room "${ roomId }" could not be found`,
             };
         }
 
@@ -30,6 +33,8 @@ export class SendMessageAsUserEndpoint extends ApiEndpoint {
             .setText('Executing send-message-as-user test endpoint')
             .setRoom(room)
             .setSender(user);
+
+        const p = await new Promise((resolve, reject) => setTimeout(() => reject('lol'), 300));
 
         const messageId = await modify.getCreator().finish(messageBuilder);
 

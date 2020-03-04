@@ -1,11 +1,6 @@
 import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { ApiEndpoint, IApiEndpointInfo, IApiRequest, IApiResponse } from '@rocket.chat/apps-engine/definition/api';
-
-const safeJsonParse = (json: any) => {
-    if (typeof json !== 'string') { return json; }
-
-    try { return JSON.parse(json); } catch { return undefined; }
-};
+import { safeJsonParse } from '../lib/safeJsonParse';
 
 /**
  * This is a test case as well as a showcase of how to do things with the Apps-Engine.
