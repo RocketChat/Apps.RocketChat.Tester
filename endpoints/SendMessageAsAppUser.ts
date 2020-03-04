@@ -1,6 +1,11 @@
 import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { ApiEndpoint, IApiEndpointInfo, IApiRequest, IApiResponse } from '@rocket.chat/apps-engine/definition/api';
 
+/**
+ * This is a test case as well as a showcase of how to do things with the Apps-Engine.
+ *
+ *
+ */
 export class SendMessageAsAppUserEndpoint extends ApiEndpoint {
     public path = 'send-message-as-app-user';
 
@@ -19,8 +24,8 @@ export class SendMessageAsAppUserEndpoint extends ApiEndpoint {
             .setText('Executing send-message-as-app-user test endpoint')
             .setRoom(room);
 
-        await modify.getCreator().finish(messageBuilder);
+        const messageId = await modify.getCreator().finish(messageBuilder);
 
-        return this.success();
+        return this.success(JSON.stringify({ messageId }));
     }
 }
