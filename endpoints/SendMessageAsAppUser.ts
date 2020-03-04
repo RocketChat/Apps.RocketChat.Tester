@@ -1,6 +1,12 @@
 import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { ApiEndpoint, IApiEndpointInfo, IApiRequest, IApiResponse } from '@rocket.chat/apps-engine/definition/api';
 
+const safeJsonParse = (json: any) => {
+    if (typeof json !== 'string') { return json; }
+
+    try { return JSON.parse(json); } catch { return undefined; }
+};
+
 /**
  * This is a test case as well as a showcase of how to do things with the Apps-Engine.
  *
@@ -11,12 +17,14 @@ export class SendMessageAsAppUserEndpoint extends ApiEndpoint {
 
     // tslint:disable-next-line:max-line-length
     public async post(request: IApiRequest, endpoint: IApiEndpointInfo, read: IRead, modify: IModify, http: IHttp, persis: IPersistence): Promise<IApiResponse> {
-        const room = await read.getRoomReader().getById('GENERAL');
+        const { roomId = 'GENERAL' } = safeJsonParse(request.content) || {};
+
+        const room = await read.getRoomReader().getById(roomId);
 
         if (!room) {
             return {
                 status: 404,
-                content: `Room '#general' hasn't been found`,
+                content: `Room "${ roomId }" could not be found`,
             };
         }
 
