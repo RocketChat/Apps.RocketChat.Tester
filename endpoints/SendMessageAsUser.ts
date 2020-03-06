@@ -34,8 +34,6 @@ export class SendMessageAsUserEndpoint extends ApiEndpoint {
             .setRoom(room)
             .setSender(user);
 
-        const p = await new Promise((resolve, reject) => setTimeout(() => reject('lol'), 300));
-
         const messageId = await modify.getCreator().finish(messageBuilder);
 
         return this.success(JSON.stringify({ messageId }));
