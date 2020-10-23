@@ -2,6 +2,7 @@ import { IAppAccessors, IConfigurationExtend, ILogger } from '@rocket.chat/apps-
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
 import { StartJob } from './slashcommand/startJob';
+import { CancelJob } from './slashcommand/cancelJob';
 
 export class RocketChatTester extends App {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
@@ -15,5 +16,6 @@ export class RocketChatTester extends App {
         });
 
         await configuration.slashCommands.provideSlashCommand(new StartJob(this));
+        await configuration.slashCommands.provideSlashCommand(new CancelJob(this));
     }
 }
