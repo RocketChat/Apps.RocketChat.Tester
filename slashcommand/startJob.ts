@@ -17,9 +17,17 @@ export class StartJob  implements ISlashCommand {
     constructor(private readonly app: App) {}
 
     public async executor(context: SlashCommandContext, read: IRead, modify: IModify): Promise<void> {
-        const id = 'test';
-        const cron = 'every 5 seconds';
+        const id = this.getJobIdFromContext(context);
+        const cron = `${ this.randomNumber(5, 11) } seconds`;
         console.log('I will schedule a new task.🤞', id, cron);
-        await modify.getScheduler().scheduleRecurring({ id, cron });
+        await modify.getScheduler().scheduleRecurring({ id, cron, data: { cron }});
+    }
+
+    private getJobIdFromContext(context: SlashCommandContext): string {
+        return context.getArguments().join(' ');
+    }
+
+    private randomNumber(min, max) {
+        return Math.trunc(Math.random() * (max - min) + min);
     }
 }

@@ -11,8 +11,13 @@ export class CancelJob implements ISlashCommand {
     constructor(private readonly app: App) {}
 
     public async executor(context: SlashCommandContext, read: IRead, modify: IModify): Promise<void> {
-        const id = 'test';
-        console.log('I will cancel a scheduled task.️🔥', id);
-        await modify.getScheduler().cancelJob(id);
+        const jobId = this.getJobIdFromContext(context);
+        console.log('I will cancel a scheduled task.️🔥', jobId);
+        await modify.getScheduler().cancelJob(jobId);
     }
+
+    private getJobIdFromContext(context: SlashCommandContext): string {
+        return context.getArguments().join(' ');
+    }
+
 }
