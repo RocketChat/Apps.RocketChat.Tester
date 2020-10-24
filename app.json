@@ -11,5 +11,6 @@
     "name": "Apps.RocketChat.Tester",
     "nameSlug": "appsrocketchattester",
     "classFile": "AppsRocketChatTesterApp.ts",
-    "description": "An app that provides endpoints to test Apps integration to Rocket.Chat"
+    "description": "An app that provides endpoints to test Apps integration to Rocket.Chat",
+    "implements": []
 }
