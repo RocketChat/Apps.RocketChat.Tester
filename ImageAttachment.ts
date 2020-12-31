@@ -8,8 +8,4 @@ export class ImageAttachment implements IMessageAttachment{
         this.imageUrl = imgUrl;
     }
 
-    private setImage(imgUrl: string){
-        this.imageUrl = imgUrl;
-    }
-
 }
