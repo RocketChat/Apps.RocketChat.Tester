@@ -18,14 +18,14 @@ export class SendMessageAsUserEndpoint extends ApiEndpoint {
             };
         }
 
-        const { userId } = request.query;
+        const { username } = request.query;
 
-        const user = await read.getUserReader().getById(userId);
+        const user = await read.getUserReader().getByUsername(username);
 
         if (!user) {
             return {
                 status: HttpStatusCode.NOT_FOUND,
-                content: `User with id "${userId}" could not be found`,
+                content: `User with username "${username}" could not be found`,
             };
         }
 
