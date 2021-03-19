@@ -20,7 +20,7 @@ export class StartJob  implements ISlashCommand {
         const id = this.getJobIdFromContext(context);
         const cron = `${ this.randomNumber(5, 11) } seconds`;
         console.log('I will schedule a new task.🤞', id, cron);
-        await modify.getScheduler().scheduleRecurring({ id, cron, data: { cron }});
+        await modify.getScheduler().scheduleRecurring({ id, interval: cron, data: { cron }});
     }
 
     private getJobIdFromContext(context: SlashCommandContext): string {

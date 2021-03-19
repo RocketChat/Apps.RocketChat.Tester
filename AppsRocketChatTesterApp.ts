@@ -5,7 +5,7 @@ import { StartJob } from './slashcommand/startJob';
 import { CancelJob } from './slashcommand/cancelJob';
 import { CancelAllJobs } from './slashcommand/cancelAllJobs';
 
-export class RocketChatTester extends App {
+export default class RocketChatTester extends App {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
@@ -14,23 +14,23 @@ export class RocketChatTester extends App {
         configuration.scheduler.registerProcessors([
             {
                 id: 'first',
-                processor: async (job) => console.log(`[${ Date() }] this is the first task`, job.attrs.data)
+                processor: async (job) => console.log(`[${ Date() }] this is the first task`, job)
             },
             {
                 id: 'second',
-                processor: async (job) => console.log(`[${ Date() }] second task here`, job.attrs.data)
+                processor: async (job) => console.log(`[${ Date() }] second task here`, job)
             },
             {
                 id: 'third',
-                processor: async (job) => console.log(`[${ Date() }] here's third`, job.attrs.data)
+                processor: async (job) => console.log(`[${ Date() }] here's third`, job)
             },
             {
                 id: 'fourth',
-                processor: async (job) => console.log(`[${ Date() }] and now the fourth`, job.attrs.data)
+                processor: async (job) => console.log(`[${ Date() }] and now the fourth`, job)
             },
             {
                 id: 'fifth',
-                processor: async (job) => console.log(`[${ Date() }] and the fifth`, job.attrs.data)
+                processor: async (job) => console.log(`[${ Date() }] and the fifth`, job)
             },
         ]);
 
