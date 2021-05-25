@@ -1,28 +1,26 @@
-import { IAppAccessors, IConfigurationExtend, ILogger } from '@rocket.chat/apps-engine/definition/accessors';
-import { ApiSecurity, ApiVisibility } from '@rocket.chat/apps-engine/definition/api';
+import { IAppAccessors, IHttp, ILogger, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
-import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
-import { SendMessageAsAppUserEndpoint } from './endpoints/SendMessageAsAppUser';
-import { SendMessageAsUserEndpoint } from './endpoints/SendMessageAsUser';
-import { TestArgumentsSlashcommand } from './slashcommands/TestArgumentsSlashcommand';
-import { TestSlashcommand } from './slashcommands/TestSlashcommand';
+import { IMessage, IPostMessageSent } from '@rocket.chat/apps-engine/definition/messages';
+import { IAppInfo, RocketChatAssociationModel, RocketChatAssociationRecord } from '@rocket.chat/apps-engine/definition/metadata';
 
-export class RocketChatTester extends App {
+export class AppsRocketChatTesterApp extends App implements IPostMessageSent {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
 
-    public async extendConfiguration(configuration: IConfigurationExtend) {
-        configuration.api.provideApi({
-            visibility: ApiVisibility.PUBLIC,
-            security: ApiSecurity.UNSECURE,
-            endpoints: [
-                new SendMessageAsAppUserEndpoint(this),
-                new SendMessageAsUserEndpoint(this),
-            ],
-        });
+    public async executePostMessageSent(message: IMessage, read: IRead, http: IHttp, persistence: IPersistence, modify: IModify): Promise<void> {
+        const association = new RocketChatAssociationRecord(RocketChatAssociationModel.MISC, 'message-count');
+        const persis = read.getPersistenceReader();
+        try {
+            let count = 0;
+            const record = await persis.readByAssociation(association);
+            console.log(record);
 
-        configuration.slashCommands.provideSlashCommand(new TestSlashcommand());
-        configuration.slashCommands.provideSlashCommand(new TestArgumentsSlashcommand());
+            await persistence.createWithAssociation({ count: 0 }, association);
+
+            console.log(`Message Sent Count: ${ count }`)
+        } catch (err) {
+            return this.getLogger().error(err);
+        }
     }
 }
