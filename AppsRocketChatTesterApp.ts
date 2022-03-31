@@ -2,6 +2,8 @@ import { IAppAccessors, IConfigurationExtend, ILogger } from '@rocket.chat/apps-
 import { ApiSecurity, ApiVisibility } from '@rocket.chat/apps-engine/definition/api';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
+import { CreateVisitorEndpoint } from './endpoints/CreateVisitor';
+import { QueryVisitorEndpoint } from './endpoints/QueryVisitor';
 import { SendMessageAsAppUserEndpoint } from './endpoints/SendMessageAsAppUser';
 import { SendMessageAsUserEndpoint } from './endpoints/SendMessageAsUser';
 import { TestArgumentsSlashcommand } from './slashcommands/TestArgumentsSlashcommand';
@@ -19,6 +21,8 @@ export class RocketChatTester extends App {
             endpoints: [
                 new SendMessageAsAppUserEndpoint(this),
                 new SendMessageAsUserEndpoint(this),
+                new QueryVisitorEndpoint(this),
+                new CreateVisitorEndpoint(this),
             ],
         });
 

@@ -23,3 +23,7 @@ out/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# rc-apps cli
+dist/
+.rcappsconfig
