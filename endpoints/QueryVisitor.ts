@@ -1,7 +1,5 @@
 import { HttpStatusCode, IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { ApiEndpoint, IApiEndpointInfo, IApiRequest, IApiResponse } from '@rocket.chat/apps-engine/definition/api';
-import { IVisitor } from '@rocket.chat/apps-engine/definition/livechat';
-import { safeJsonParse } from '../lib/safeJsonParse';
 
 type QueryParams = {
     token?: string;
