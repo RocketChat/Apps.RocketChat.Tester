@@ -25,5 +25,4 @@ Temporary Items
 .apdisk
 
 # rc-apps cli
-dist/
 .rcappsconfig
