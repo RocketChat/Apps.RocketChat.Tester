@@ -2,6 +2,7 @@ import { IAppAccessors, IConfigurationExtend, ILogger } from '@rocket.chat/apps-
 import { ApiSecurity, ApiVisibility } from '@rocket.chat/apps-engine/definition/api';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
+import { CreateOrGetOmnichannelRoomForVisitorEndpoint } from './endpoints/CreateOrGetOmnichannelRoomForVisitor';
 import { CreateVisitorEndpoint } from './endpoints/CreateVisitor';
 import { QueryVisitorEndpoint } from './endpoints/QueryVisitor';
 import { SendMessageAsAppUserEndpoint } from './endpoints/SendMessageAsAppUser';
@@ -23,6 +24,7 @@ export class RocketChatTester extends App {
                 new SendMessageAsUserEndpoint(this),
                 new QueryVisitorEndpoint(this),
                 new CreateVisitorEndpoint(this),
+                new CreateOrGetOmnichannelRoomForVisitorEndpoint(this),
             ],
         });
 
