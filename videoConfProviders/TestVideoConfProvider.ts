@@ -11,9 +11,9 @@ export class TestVideoConfProvider implements IVideoConfProvider {
     public name = 'test'
 
     public capabilities = {
-        mic: false,
+        mic: true,
         cam: false,
-        title: false,
+        title: true,
     }
 
     public async isFullyConfigured(): Promise<boolean> {
