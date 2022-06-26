@@ -6,6 +6,8 @@ import { SendMessageAsAppUserEndpoint } from './endpoints/SendMessageAsAppUser';
 import { SendMessageAsUserEndpoint } from './endpoints/SendMessageAsUser';
 import { TestArgumentsSlashcommand } from './slashcommands/TestArgumentsSlashcommand';
 import { TestSlashcommand } from './slashcommands/TestSlashcommand';
+import { TestVideoConfProvider } from './videoConfProviders/TestVideoConfProvider';
+import { UnconfiguredVideoConfProvider } from './videoConfProviders/UnconfiguredVideoConfProvider';
 
 export class RocketChatTester extends App {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
@@ -24,5 +26,8 @@ export class RocketChatTester extends App {
 
         configuration.slashCommands.provideSlashCommand(new TestSlashcommand());
         configuration.slashCommands.provideSlashCommand(new TestArgumentsSlashcommand());
+
+        configuration.videoConfProviders.provideVideoConfProvider(new TestVideoConfProvider());
+        configuration.videoConfProviders.provideVideoConfProvider(new UnconfiguredVideoConfProvider());
     }
 }
