@@ -4,6 +4,7 @@ import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
 import { SendMessageAsAppUserEndpoint } from './endpoints/SendMessageAsAppUser';
 import { SendMessageAsUserEndpoint } from './endpoints/SendMessageAsUser';
+import { OpenContextualBarSlashcommand } from './slashcommands/OpenContextualBarSlashcommand';
 import { TestArgumentsSlashcommand } from './slashcommands/TestArgumentsSlashcommand';
 import { TestSlashcommand } from './slashcommands/TestSlashcommand';
 import { TestVideoConfProvider } from './videoConfProviders/TestVideoConfProvider';
@@ -26,6 +27,7 @@ export class RocketChatTester extends App {
 
         configuration.slashCommands.provideSlashCommand(new TestSlashcommand());
         configuration.slashCommands.provideSlashCommand(new TestArgumentsSlashcommand());
+        configuration.slashCommands.provideSlashCommand(new OpenContextualBarSlashcommand());
 
         configuration.videoConfProviders.provideVideoConfProvider(new TestVideoConfProvider());
         configuration.videoConfProviders.provideVideoConfProvider(new UnconfiguredVideoConfProvider());
