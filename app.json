@@ -1,7 +1,7 @@
 {
     "id": "bc4dd4a1-bf9b-408e-83a4-aba7eba0bf02",
-    "version": "0.0.5",
-    "requiredApiVersion": "^1.33.0",
+    "version": "0.0.6",
+    "requiredApiVersion": "^1.40.0",
     "iconFile": "icon.png",
     "author": {
         "name": "Rocket.Chat",
@@ -11,6 +11,49 @@
     "name": "Apps.RocketChat.Tester",
     "nameSlug": "appsrocketchattester",
     "classFile": "AppsRocketChatTesterApp.ts",
-    "description": "An app that provides endpoints to test Apps integration to Rocket.Chat",
-    "implements": []
+    "description": "An app that provides endpoints to test Apps integration to Rocket.Chat ",
+    "implements": [
+        "IUIKitInteractionHandler"
+    ],
+    "permissions": [
+        {
+            "name": "api"
+        },
+        {
+            "name": "persistence"
+        },
+        {
+            "name": "slashcommand"
+        },
+        {
+            "name": "networking"
+        },
+        {
+            "name": "ui.registerButtons"
+        },
+        {
+            "name": "ui.interact"
+        },
+        {
+            "name": "user.read"
+        },
+        {
+            "name": "user.write"
+        },
+        {
+            "name": "message.write"
+        },
+        {
+            "name": "room.read"
+        },
+        {
+            "name": "room.write"
+        },
+        {
+            "name": "server-setting.read"
+        },
+        {
+            "name": "video-conference-provider"
+        }
+    ]
 }

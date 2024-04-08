@@ -1,11 +1,15 @@
 {
     "devDependencies": {
-        "@rocket.chat/apps-engine": "^1.33.0",
+        "@rocket.chat/apps-engine": "^1.40.0",
         "@types/node": "^10.12.14",
         "tslint": "^5.10.0",
         "typescript": "^4.0.5"
     },
     "scripts": {
         "typecheck": "tsc --noEmit --skipLibCheck"
+    },
+    "dependencies": {
+        "@rocket.chat/icons": "^0.34.0",
+        "@rocket.chat/ui-kit": "^0.33.0"
     }
 }
