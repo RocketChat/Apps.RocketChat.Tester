@@ -19,6 +19,7 @@ import { OpenContextualBarSlashcommand } from "./slashcommands/OpenContextualBar
 import { TestArgumentsSlashcommand } from "./slashcommands/TestArgumentsSlashcommand";
 import { TestSlashcommand } from "./slashcommands/TestSlashcommand";
 import { TestVideoConfProvider } from "./videoConfProviders/TestVideoConfProvider";
+import { PersistentChatVideoConfProvider } from "./videoConfProviders/PersistentChatVideoConfProvider";
 import { UnconfiguredVideoConfProvider } from "./videoConfProviders/UnconfiguredVideoConfProvider";
 import { OpenModalSlashcommand } from "./slashcommands/OpenModalSlashcommand";
 import { ModalViewSubmitHandler } from "./handlers/ModalHandlers";
@@ -55,6 +56,9 @@ export class RocketChatTester extends App {
 
         configuration.videoConfProviders.provideVideoConfProvider(
             new TestVideoConfProvider()
+        );
+        configuration.videoConfProviders.provideVideoConfProvider(
+            new PersistentChatVideoConfProvider()
         );
         configuration.videoConfProviders.provideVideoConfProvider(
             new UnconfiguredVideoConfProvider()

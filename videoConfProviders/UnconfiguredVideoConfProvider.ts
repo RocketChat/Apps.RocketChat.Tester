@@ -14,6 +14,7 @@ export class UnconfiguredVideoConfProvider implements IVideoConfProvider {
         mic: false,
         cam: false,
         title: false,
+        persistentChat: false,
     }
 
     public async isFullyConfigured(): Promise<boolean> {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import type { IVideoConferenceUser } from '@rocket.chat/apps-engine/definition/videoConferences/IVideoConferenceUser';
 import type {
     IVideoConfProvider,
@@ -7,14 +6,14 @@ import type {
     IVideoConferenceOptions,
 } from '@rocket.chat/apps-engine/definition/videoConfProviders';
 
-export class TestVideoConfProvider implements IVideoConfProvider {
-    public name = 'test'
+export class PersistentChatVideoConfProvider implements IVideoConfProvider {
+    public name = 'persistentchat'
 
     public capabilities = {
         mic: true,
-        cam: false,
-        title: true,
-        persistentChat: false,
+        cam: true,
+        title: false,
+        persistentChat: true,
     }
 
     public async isFullyConfigured(): Promise<boolean> {
@@ -22,7 +21,7 @@ export class TestVideoConfProvider implements IVideoConfProvider {
     }
 
     public async generateUrl(call: VideoConfData): Promise<string> {
-        return `test/${call.type}/${call._id}/${call.title}`;
+        return `pchat/${call.type}/${call._id}/${call.discussionRid || 'none'}`;
     }
 
     public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
