@@ -7,14 +7,14 @@ import type {
     IVideoConferenceOptions,
 } from '@rocket.chat/apps-engine/definition/videoConfProviders';
 
-export class PermanentChatVideoConfProvider implements IVideoConfProvider {
-    public name = 'permanentChat'
+export class PersistentChatVideoConfProvider implements IVideoConfProvider {
+    public name = 'persistentChat'
 
     public capabilities = {
         mic: true,
         cam: true,
         title: false,
-        permanentChat: true,
+        persistentChat: true,
     }
 
     public async isFullyConfigured(): Promise<boolean> {
@@ -22,7 +22,7 @@ export class PermanentChatVideoConfProvider implements IVideoConfProvider {
     }
 
     public async generateUrl(call: VideoConfData): Promise<string> {
-        return `test/${call.type}/${call._id}/${call.discussionRid || 'none'}`;
+        return `pchat/${call.type}/${call._id}/${call.discussionRid || 'none'}`;
     }
 
     public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
