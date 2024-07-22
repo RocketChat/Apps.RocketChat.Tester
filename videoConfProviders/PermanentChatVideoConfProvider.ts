@@ -7,25 +7,31 @@ import type {
     IVideoConferenceOptions,
 } from '@rocket.chat/apps-engine/definition/videoConfProviders';
 
-export class UnconfiguredVideoConfProvider implements IVideoConfProvider {
-    public name = 'unconfigured'
+export class PermanentChatVideoConfProvider implements IVideoConfProvider {
+    public name = 'permanentChat'
 
     public capabilities = {
-        mic: false,
-        cam: false,
+        mic: true,
+        cam: true,
         title: false,
-        permanentChat: false,
+        permanentChat: true,
     }
 
     public async isFullyConfigured(): Promise<boolean> {
-        return false;
+        return true;
     }
 
     public async generateUrl(call: VideoConfData): Promise<string> {
-        return `unconfigured/${call._id}`;
+        return `test/${call.type}/${call._id}/${call.discussionRid || 'none'}`;
     }
 
     public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
-        return call.url;
+        const { url } = call;
+
+        const uid = user ? `/${user._id}` : '';
+        const cam = options.cam ? '/cam' : '';
+        const mic = options.mic ? '/mic' : '';
+
+        return `${url}${uid}${cam}${mic}`;
     }
 }

@@ -14,6 +14,7 @@ export class TestVideoConfProvider implements IVideoConfProvider {
         mic: true,
         cam: false,
         title: true,
+        permanentChat: false,
     }
 
     public async isFullyConfigured(): Promise<boolean> {
