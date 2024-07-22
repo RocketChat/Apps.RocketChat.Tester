@@ -8,7 +8,7 @@ import type {
 } from '@rocket.chat/apps-engine/definition/videoConfProviders';
 
 export class PersistentChatVideoConfProvider implements IVideoConfProvider {
-    public name = 'persistentChat'
+    public name = 'persistentchat'
 
     public capabilities = {
         mic: true,
