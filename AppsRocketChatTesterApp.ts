@@ -27,10 +27,19 @@ import {
     IUIKitResponse,
     UIKitViewSubmitInteractionContext,
 } from "@rocket.chat/apps-engine/definition/uikit";
+import { ILivechatRoom, IPreLivechatRoomCreatePrevent } from "@rocket.chat/apps-engine/definition/livechat";
 
-export class RocketChatTester extends App {
+export class RocketChatTester extends App implements IPreLivechatRoomCreatePrevent {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
+    }
+
+    async executeLivechatRoomCreatePrevent(room: ILivechatRoom, read: IRead, http: IHttp, persis: IPersistence): Promise<boolean> {
+        if (room.visitor.name == 'visitor prevent from app') {
+            return true;
+        }
+
+        return false;
     }
 
     public async extendConfiguration(configuration: IConfigurationExtend) {
