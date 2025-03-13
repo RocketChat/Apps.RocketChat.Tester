@@ -36,10 +36,10 @@ export class RocketChatTester extends App implements IPreLivechatRoomCreatePreve
 
     async executeLivechatRoomCreatePrevent(room: ILivechatRoom, read: IRead, http: IHttp, persis: IPersistence): Promise<boolean> {
         if (room.visitor.name == 'visitor prevent from app') {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public async extendConfiguration(configuration: IConfigurationExtend) {
