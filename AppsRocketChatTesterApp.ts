@@ -27,8 +27,13 @@ import {
     IUIKitResponse,
     UIKitViewSubmitInteractionContext,
 } from "@rocket.chat/apps-engine/definition/uikit";
+import { UserNotAllowedException } from "@rocket.chat/apps-engine/definition/exceptions";
+import {
+    IPreRoomUserJoined,
+    IRoomUserJoinedContext,
+} from "@rocket.chat/apps-engine/definition/rooms";
 
-export class RocketChatTester extends App {
+export class RocketChatTester extends App implements IPreRoomUserJoined {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
@@ -63,6 +68,12 @@ export class RocketChatTester extends App {
         configuration.videoConfProviders.provideVideoConfProvider(
             new UnconfiguredVideoConfProvider()
         );
+    }
+
+    public async executePreRoomUserJoined(context: IRoomUserJoinedContext) {
+        if (context.joiningUser.username === "userNotAllowedByApp") {
+            throw new UserNotAllowedException("TEST OF NOT ALLOWED USER");
+        }
     }
 
     public async executeViewSubmitHandler(
