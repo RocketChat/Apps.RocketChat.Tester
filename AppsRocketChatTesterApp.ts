@@ -32,7 +32,7 @@ import {
     IPreRoomUserJoined,
     IRoomUserJoinedContext,
 } from "@rocket.chat/apps-engine/definition/rooms";
-import { ILivechatRoom, IPreLivechatRoomCreatePrevent } from "@rocket.chat/apps-engine/definition/livechat";
+import { ILivechatRoom } from "@rocket.chat/apps-engine/definition/livechat";
 
 export class RocketChatTester extends App implements IPreRoomUserJoined {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
