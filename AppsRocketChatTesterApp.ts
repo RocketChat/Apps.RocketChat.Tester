@@ -27,15 +27,22 @@ import {
     IUIKitResponse,
     UIKitViewSubmitInteractionContext,
 } from "@rocket.chat/apps-engine/definition/uikit";
-import { UserNotAllowedException } from "@rocket.chat/apps-engine/definition/exceptions";
+import { AppsEngineException, UserNotAllowedException } from "@rocket.chat/apps-engine/definition/exceptions";
 import {
     IPreRoomUserJoined,
     IRoomUserJoinedContext,
 } from "@rocket.chat/apps-engine/definition/rooms";
+import { ILivechatRoom, IPreLivechatRoomCreatePrevent } from "@rocket.chat/apps-engine/definition/livechat";
 
-export class RocketChatTester extends App implements IPreRoomUserJoined {
+export class RocketChatTester extends App implements IPreRoomUserJoined, IPreLivechatRoomCreatePrevent {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
+    }
+
+    async executeLivechatRoomCreatePrevent(room: ILivechatRoom, read: IRead, http: IHttp, persis: IPersistence): Promise<void> {
+        if (room.visitor.name == 'visitor prevent from app') {
+            throw new AppsEngineException('Visitor name is not allowed');
+        }
     }
 
     public async extendConfiguration(configuration: IConfigurationExtend) {
