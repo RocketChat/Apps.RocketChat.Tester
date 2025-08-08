@@ -33,6 +33,7 @@ import {
     IRoomUserJoinedContext,
 } from "@rocket.chat/apps-engine/definition/rooms";
 import { ILivechatRoom, IPreLivechatRoomCreatePrevent } from "@rocket.chat/apps-engine/definition/livechat";
+import { OutboundProvider } from "./providers/OutboundProvider";
 
 export class RocketChatTester extends App implements IPreRoomUserJoined, IPreLivechatRoomCreatePrevent {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
@@ -74,6 +75,9 @@ export class RocketChatTester extends App implements IPreRoomUserJoined, IPreLiv
         );
         configuration.videoConfProviders.provideVideoConfProvider(
             new UnconfiguredVideoConfProvider()
+        );
+        configuration.outboundCommunication.registerPhoneProvider(
+            new OutboundProvider(this.getID(), this)
         );
     }
 
