@@ -1,6 +1,6 @@
 import { ILogger, IRead } from "@rocket.chat/apps-engine/definition/accessors";
 import { MessageType } from "@rocket.chat/apps-engine/definition/messages";
-import { IOutboundMessage, TemplateComponent } from "@rocket.chat/apps-engine/definition/outboundComunication/IOutboundMessage";
+import { IOutboundMessage, TemplateComponent } from "@rocket.chat/apps-engine/definition/outboundCommunication/IOutboundMessage";
 import { IRequestTemplateComponent, ID360Message, LanguagePolicy, TemplateMetadataInfo, IResponseContact, ISavedPhoneNumberData } from "../enums/WhatsApp360CloudApi";
 
 export async function validateOutboundMessage(message: IOutboundMessage): Promise<void> {
