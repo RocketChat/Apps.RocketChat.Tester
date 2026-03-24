@@ -1,7 +1,7 @@
-import { IOutboundPhoneMessageProvider, ProviderMetadata } from "@rocket.chat/apps-engine/definition/outboundComunication/IOutboundCommsProvider";
+import { IOutboundPhoneMessageProvider, ProviderMetadata } from "@rocket.chat/apps-engine/definition/outboundCommunication/IOutboundCommsProvider";
 import { RocketChatTester } from "../AppsRocketChatTesterApp";
 import { IRead, IModify, IHttp, IPersistence } from "@rocket.chat/apps-engine/definition/accessors";
-import { IOutboundMessage, IOutboundProviderTemplate, TemplateComponent } from "@rocket.chat/apps-engine/definition/outboundComunication";
+import { IOutboundMessage, IOutboundProviderTemplate, TemplateComponent } from "@rocket.chat/apps-engine/definition/outboundCommunication";
 import { createWhatsAppPayload, filterTemplateComponents, validateOutboundMessage, validateTemplateParameters } from "../helpers/OutboundMessage";
 import { IContactStatus, IRequestTemplateComponent, IResponseContact, ISavedTemplate, TemplateMetadataInfo } from "../enums/WhatsApp360CloudApi";
 
@@ -56,7 +56,7 @@ export class OutboundProvider implements IOutboundPhoneMessageProvider {
 				},
 				components: [
 					{
-						type: 'BODY',
+						type: 'body',
 						text: "Hello {{1}},\n\nThank you for choosing '{{2}}' for your stay for dates {{3}}.\n\nI'm Anna Mitchell, your check-in manager.\n\nUnfortunately, the room you booked is temporarily unavailable due to urgent repairs. However, we are pleased to offer you a spacious, higher-class room at the same price, ensuring an even more comfortable stay!\n\nTo save your reservation, please use your personalized link: {{4}}\n\nEnter your card details and confirm the operation in your bank's application. The amount of your booking will be temporarily held for 1 minute and then refunded. This is to verify that your details are up to date and to transfer your booking to the upgraded room.\n\nThe link will be active for 24 hours.\n\nThank you for your understanding, and we look forward to welcoming you soon at our hotel!",
 						example: {
 							bodyText: [
